@@ -1,0 +1,179 @@
+$w: 100%
+$colorgreen: #5fda75
+$colorgrey: #898989
+$colorblue: #30ade8
+$color_blue_start: #50c1e6
+$color_blue_end: #2782c7
+$bgc: white
+$colorShadow: rgba(black,0.1)
+$shadowInset: inset 1px 1px 7px $colorShadow
+*
+  // border: solid 1px black
+@mixin linear
+  background: linear-gradient(20deg,$color_blue_start,$color_blue_end)
+@mixin flexCenter
+  display: flex
+  justify-content: center
+  align-items: center 
+@mixin size($w,$h,$bgc)
+  width: $w
+  height: $h
+  background-color: $bgc
+@mixin box
+  +size(100%,11.7%)
+  box-shadow: $colorShadow
+  
+html,body
+  +linear
+  +flexCenter
+  margin: 0
+  width: 100%
+  height: 100%
+  padding: 0
+  background-color: #222
+  flex-direction: column
+.pages
+  background-color: white
+  width: 320px
+  height: 500px
+  &:hover
+    .today
+      opacity: 1
+      height: 85px
+      .box
+        opacity: 1
+  .top
+    +size(100%,9%,white)
+    +flexCenter
+    .logo
+      width: 90px
+      height: 30px
+      background-image: url(https://www.vectorlogo.zone/logos/revolut/revolut-card.png)
+      background-size: cover
+      margin-bottom: 5px
+      
+  .green
+    +size(100%,4%,$colorgreen)
+    +flexCenter
+    font-size: 7px
+    color: white
+    animation-delay: -2s
+    animation: green 4s infinite linear
+  
+    @keyframes green
+      0%
+        background-color: white
+      50%
+        background-color: $colorgreen
+      100%
+        background-color: $colorgreen
+
+  .amount
+    +size(100%,19%,white)
+    +flexCenter
+    height: 90px
+    font-size: 20px
+    font-weight: bold
+    flex-direction: column
+    &:before
+      content: "£600"
+      letter-spacing: 0.5px
+    &:after
+      content: "This month"
+      font-size: 10px
+      color: $colorgrey
+  .budget
+    +size(100%,12%,white)
+    +flexCenter
+    font-size: 15px
+    box-shadow: $shadowInset
+    border-radius: 5px
+    i
+      color: white
+      +size(30px,30px,$colorblue)
+      +flexCenter
+      border-radius: 100%
+      margin: 10px
+    h2
+      +size(30px,30px,transparent)
+      +flexCenter
+      font-size: 25px
+      font-weight: bold
+      margin-left: 30%
+      color: $colorblue
+      cursor: pointer
+      &:hover
+        color: #268ebf
+  .today
+    width: 90%
+    height: 0
+    display: block
+    justify-content: space-around
+    align-items: center
+    flex-direction: column
+    margin-left: 5%
+    transition: 0.5s
+    opacity: 0
+    .box
+      opacity: 0
+      display: flex
+      justify-content: space-between
+      margin-top: 5px
+      letter-spacing: 0.2px
+      font-size: 12px
+      font-weight: bold
+      .top,.top1
+        color: $colorgrey
+        font-size: 8px
+        display: inline-block
+        width: 50%
+      .top1
+        justify-content: flex-end
+        display: flex
+        
+  .spent
+    padding-top: 10px
+    +size(100%,38%,white)
+    margin-top: 3px
+    font-size: 15px
+    box-shadow: $shadowInset
+    border-radius: 5px
+    display: block
+    justify-content: space-around
+    align-items: center
+    flex-direction: column
+    .detail
+      display: flex
+      justify-content: space-between
+      align-items: center
+      height: 47px
+      h4
+        margin-right: 28px
+      .contain
+        width: 50%
+        display: flex
+        justify-content: space-between
+        align-items: center
+        i
+          color: white
+          +size(30px,30px,$colorblue)
+          +flexCenter
+          border-radius: 100%
+          margin-left: 36px
+          margin-right: 5px
+          
+          
+.box:nth-child(1)
+  transition-delay: 0.6s
+.box:nth-child(2)
+  transition-delay: 0.8s
+.box:nth-child(3)
+  transition-delay: 1s
+.box:nth-child(4)
+  transition-delay: 1.2s
+
+#swihch
+  display: none
+#swihch:checked+.pages
+  .amount
+    color: red
